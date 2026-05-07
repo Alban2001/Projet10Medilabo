@@ -1,0 +1,84 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "apiinformationspatientmedilabo/{version}/patient/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "informations-patient",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/patient/{id}",
+      "UpstreamHttpMethod": [ "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "apiinformationspatientmedilabo/{version}/patient",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "informations-patient",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/patient/",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "apihistoriquepatientmedilabo/{version}/historique/note",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "historique-patient",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/patient/historique/note",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "apihistoriquepatientmedilabo/{version}/historique/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "historique-patient",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/patient/historique/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "apirapportpatientmedilabo/{version}/rapport",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "rapport-patient",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/patient/rapport",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    }
+  ]
+}
