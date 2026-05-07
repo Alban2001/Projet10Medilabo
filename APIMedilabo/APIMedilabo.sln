@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIMedilabo", "APIMedilabo.csproj", "{CC93DB5E-8044-4497-BBC1-8FEDDF83117B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGatewayMediLabo", "..\APIGatewayMediLabo\APIGatewayMediLabo.csproj", "{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIDatabaseAuthenticationMediLabo", "..\APIDatabaseAuthenticationMediLabo\APIDatabaseAuthenticationMediLabo.csproj", "{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC93DB5E-8044-4497-BBC1-8FEDDF83117B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC93DB5E-8044-4497-BBC1-8FEDDF83117B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC93DB5E-8044-4497-BBC1-8FEDDF83117B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC93DB5E-8044-4497-BBC1-8FEDDF83117B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2AA4507D-8F81-4F4C-8941-E985E1372601}
+	EndGlobalSection
+EndGlobal

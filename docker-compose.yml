@@ -1,0 +1,28 @@
+﻿version: '1'
+
+services:
+  apigatewaymedilabo:
+    image: apigatewaymedilabo
+    ports:
+      - "5100:80"
+    depends_on:
+      - apiinformationspatientmedilabo
+      - apihistoriquepatientmedilabo
+      - apirapportpatientmedilabo
+
+  apiinformationspatientmedilabo:
+    image: apiinformationspatientmedilabo
+    expose:
+      - "80"
+    ports:
+      - "5101:80"
+
+  apihistoriquepatientmedilabo:
+    image: apihistoriquepatientmedilabo
+    ports:
+      - "5103:80"
+
+  apirapportpatientmedilabo:
+    image: apirapportpatientmedilabo
+    ports:
+      - "5103:80"
