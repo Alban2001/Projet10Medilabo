@@ -1542,22 +1542,6 @@
             "rid": "win"
           }
         }
-      },
-      "APIMedilabo/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.21.0"
-        },
-        "compile": {
-          "bin/placeholder/APIMedilabo.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/APIMedilabo.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
       }
     }
   },
@@ -3988,16 +3972,10 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
-    },
-    "APIMedilabo/1.0.0": {
-      "type": "project",
-      "path": "../APIMedilabo/APIMedilabo.csproj",
-      "msbuildProject": "../APIMedilabo/APIMedilabo.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "APIMedilabo >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.26",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.26",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.26",
@@ -4036,11 +4014,7 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {
-            "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIMedilabo\\APIMedilabo.csproj": {
-              "projectPath": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIMedilabo\\APIMedilabo.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
