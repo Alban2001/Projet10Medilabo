@@ -23,8 +23,4 @@
     <Folder Include="Repositories\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\APIMedilabo\APIMedilabo.csproj" />
-  </ItemGroup>
-
 </Project>
