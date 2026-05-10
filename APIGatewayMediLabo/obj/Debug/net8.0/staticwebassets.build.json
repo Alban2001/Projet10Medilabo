@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "6fFtQACrbIZi1zcbOgKw8Ixeozb3PYdoT4vv9x0mp4Q=",
+  "Source": "APIGatewayMediLabo",
+  "BasePath": "_content/APIGatewayMediLabo",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
