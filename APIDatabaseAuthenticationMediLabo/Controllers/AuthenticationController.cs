@@ -11,10 +11,10 @@ namespace APIDatabaseAuthenticationMediLabo.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly JwtService _jwtService;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, JwtService jwtService)
+        public AuthenticationController(UserManager<User> userManager, JwtService jwtService)
         {
             _userManager = userManager;
             _jwtService = jwtService;
@@ -23,7 +23,7 @@ namespace APIDatabaseAuthenticationMediLabo.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO dto)
         {
-            var user = new ApplicationUser
+            var user = new User
             {
                 UserName = dto.Email,
                 Email = dto.Email

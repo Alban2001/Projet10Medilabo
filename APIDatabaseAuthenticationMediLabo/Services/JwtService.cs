@@ -15,7 +15,7 @@ namespace APIDatabaseAuthenticationMediLabo.Services
             _config = config;
         }
 
-        public string GenerateToken(ApplicationUser user)
+        public string GenerateToken(User user)
         {
             var claims = new[]
             {
