@@ -4,14 +4,14 @@
     "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIGatewayMediLabo\\APIGatewayMediLabo.csproj": {}
   },
   "projects": {
-    "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIDatabaseAuthenticationMediLabo\\APIDatabaseAuthenticationMediLabo.csproj": {
+    "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIAuthenticationMediLabo\\APIAuthenticationMediLabo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIDatabaseAuthenticationMediLabo\\APIDatabaseAuthenticationMediLabo.csproj",
-        "projectName": "APIDatabaseAuthenticationMediLabo",
-        "projectPath": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIDatabaseAuthenticationMediLabo\\APIDatabaseAuthenticationMediLabo.csproj",
+        "projectUniqueName": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIAuthenticationMediLabo\\APIAuthenticationMediLabo.csproj",
+        "projectName": "APIAuthenticationMediLabo",
+        "projectPath": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIAuthenticationMediLabo\\APIAuthenticationMediLabo.csproj",
         "packagesPath": "C:\\Users\\alban\\.nuget\\packages\\",
-        "outputPath": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIDatabaseAuthenticationMediLabo\\obj\\",
+        "outputPath": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIAuthenticationMediLabo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -204,8 +204,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIDatabaseAuthenticationMediLabo\\APIDatabaseAuthenticationMediLabo.csproj": {
-                "projectPath": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIDatabaseAuthenticationMediLabo\\APIDatabaseAuthenticationMediLabo.csproj"
+              "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIAuthenticationMediLabo\\APIAuthenticationMediLabo.csproj": {
+                "projectPath": "D:\\DEVELOPPEUR WEB (BACK END DOTNET) - OPENCLASSROOMS - (2024-2026)\\Projets\\Projet 10\\APIMedilabo\\APIAuthenticationMediLabo\\APIAuthenticationMediLabo.csproj"
               }
             }
           }

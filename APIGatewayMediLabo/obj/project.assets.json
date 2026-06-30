@@ -1191,7 +1191,7 @@
           }
         }
       },
-      "APIDatabaseAuthenticationMediLabo/1.0.0": {
+      "APIAuthenticationMediLabo/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -1201,10 +1201,10 @@
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.21.0"
         },
         "compile": {
-          "bin/placeholder/APIDatabaseAuthenticationMediLabo.dll": {}
+          "bin/placeholder/APIAuthenticationMediLabo.dll": {}
         },
         "runtime": {
-          "bin/placeholder/APIDatabaseAuthenticationMediLabo.dll": {}
+          "bin/placeholder/APIAuthenticationMediLabo.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -1214,7 +1214,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "APIDatabaseAuthenticationMediLabo": "1.0.0",
+          "APIAuthenticationMediLabo": "1.0.0",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.21.0"
         },
         "compile": {
@@ -3127,10 +3127,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "APIDatabaseAuthenticationMediLabo/1.0.0": {
+    "APIAuthenticationMediLabo/1.0.0": {
       "type": "project",
-      "path": "../APIDatabaseAuthenticationMediLabo/APIDatabaseAuthenticationMediLabo.csproj",
-      "msbuildProject": "../APIDatabaseAuthenticationMediLabo/APIDatabaseAuthenticationMediLabo.csproj"
+      "path": "../APIAuthenticationMediLabo/APIAuthenticationMediLabo.csproj",
+      "msbuildProject": "../APIAuthenticationMediLabo/APIAuthenticationMediLabo.csproj"
     },
     "APIMedilabo/1.0.0": {
       "type": "project",

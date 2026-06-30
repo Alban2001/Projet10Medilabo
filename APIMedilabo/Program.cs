@@ -1,5 +1,5 @@
-﻿using APIDatabaseAuthenticationMediLabo.Data;
-using APIDatabaseAuthenticationMediLabo.Models;
+﻿using APIAuthenticationMediLabo.Data;
+using APIAuthenticationMediLabo.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

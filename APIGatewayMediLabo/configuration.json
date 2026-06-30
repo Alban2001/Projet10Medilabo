@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "apiinformationspatientmedilabo/{version}/patient/{id}",
+      "DownstreamPathTemplate": "/apiinformationspatientmedilabo/patient/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -17,7 +17,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "apiinformationspatientmedilabo/{version}/patient",
+      "DownstreamPathTemplate": "/apiinformationspatientmedilabo/patient",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -33,7 +33,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "apihistoriquepatientmedilabo/{version}/historique/note",
+      "DownstreamPathTemplate": "/apihistoriquepatientmedilabo/historique/note",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -49,7 +49,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "apihistoriquepatientmedilabo/{version}/historique/{id}",
+      "DownstreamPathTemplate": "/apihistoriquepatientmedilabo/historique/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -65,7 +65,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "apirapportpatientmedilabo/{version}/rapport",
+      "DownstreamPathTemplate": "/apirapportpatientmedilabo/rapport",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

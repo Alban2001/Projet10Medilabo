@@ -699,7 +699,7 @@
           }
         }
       },
-      "APIDatabaseAuthenticationMediLabo/1.0.0": {
+      "APIAuthenticationMediLabo/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.26",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.26",
@@ -707,7 +707,7 @@
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.21.0"
         },
         "runtime": {
-          "APIDatabaseAuthenticationMediLabo.dll": {
+          "APIAuthenticationMediLabo.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -715,7 +715,7 @@
       },
       "APIMedilabo/1.0.0": {
         "dependencies": {
-          "APIDatabaseAuthenticationMediLabo": "1.0.0",
+          "APIAuthenticationMediLabo": "1.0.0",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.21.0"
         },
         "runtime": {
@@ -1202,7 +1202,7 @@
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
-    "APIDatabaseAuthenticationMediLabo/1.0.0": {
+    "APIAuthenticationMediLabo/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

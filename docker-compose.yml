@@ -1,28 +1,68 @@
-﻿version: '1'
-
-services:
+﻿services:
   apigatewaymedilabo:
     image: apigatewaymedilabo
     ports:
       - "5100:80"
-    depends_on:
-      - apiinformationspatientmedilabo
-      - apihistoriquepatientmedilabo
-      - apirapportpatientmedilabo
-
-  apiinformationspatientmedilabo:
-    image: apiinformationspatientmedilabo
+    build: "./APIGatewayMediLabo/"
+      
+  apiauthenticationmedilabo:
+    image: apiauthenticationmedilabo
     expose:
       - "80"
     ports:
       - "5101:80"
+    depends_on:
+      - apigatewaymedilabo
+      # - sqlserver
+    build: "./APIAuthenticationMedilabo/"
+    volumes: 
+        - dataPatients:/app/dataPatients
+
+  apiinformationspatient:
+    image: apiinformationspatient
+    expose:
+      - "80"
+    ports:
+      - "5102:80"
+    depends_on:
+      - apigatewaymedilabo
+      - apiauthenticationmedilabo 
+      # - sqlserver
+    build: "./APIInformationsPatient/"
+    volumes: 
+        - dataPatients:/app/dataPatients
 
   apihistoriquepatientmedilabo:
     image: apihistoriquepatientmedilabo
     ports:
       - "5103:80"
+    depends_on:
+      - apigatewaymedilabo
+      - apiauthenticationmedilabo 
+      # - sqlserver
+    build: "./APIHistoriquePatient/"
 
   apirapportpatientmedilabo:
     image: apirapportpatientmedilabo
     ports:
-      - "5103:80"
+      - "5104:80"
+    depends_on:
+      - apigatewaymedilabo
+      - apiauthenticationmedilabo 
+      # - sqlserver
+    build: "./APIRapportPatient/"
+  
+  # sqlserver:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   environment:  
+  #     ACCEPT_EULA: "Y"
+  #     MSSQL_SA_PASSWORD: "Medilabo2026!"
+  #   ports:
+  #     - "1433:1433" 
+  #   volumes:
+  #     - sql-data:/var/opt/mssql 
+
+volumes:
+  dataPatients:
+  # sql-data:  
+  
