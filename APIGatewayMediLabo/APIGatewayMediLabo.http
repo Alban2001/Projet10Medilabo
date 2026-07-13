@@ -1,6 +1,6 @@
 @APIGatewayMediLabo_HostAddress = http://localhost:5074
 
-GET {{APIGatewayMediLabo_HostAddress}}/weatherforecast/
+GET {{APIGatewayMediLabo_HostAddress}}/swagger/
 Accept: application/json
 
 ###

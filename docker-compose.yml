@@ -2,28 +2,28 @@
   apigatewaymedilabo:
     image: apigatewaymedilabo
     ports:
-      - "5100:80"
+      - "32768:8080"
     build: "./APIGatewayMediLabo/"
+    networks:
+      - medilabo-network
       
   apiauthenticationmedilabo:
     image: apiauthenticationmedilabo
-    expose:
-      - "80"
     ports:
-      - "5101:80"
+      - "32771:8080"
     depends_on:
       - apigatewaymedilabo
       # - sqlserver
     build: "./APIAuthenticationMedilabo/"
     volumes: 
         - dataPatients:/app/dataPatients
+    networks:
+      - medilabo-network
 
   apiinformationspatient:
     image: apiinformationspatient
-    expose:
-      - "80"
     ports:
-      - "5102:80"
+      - "32769:8080"
     depends_on:
       - apigatewaymedilabo
       - apiauthenticationmedilabo 
@@ -31,26 +31,43 @@
     build: "./APIInformationsPatient/"
     volumes: 
         - dataPatients:/app/dataPatients
+    networks:
+      - medilabo-network
 
-  apihistoriquepatientmedilabo:
-    image: apihistoriquepatientmedilabo
+  frontpatient:
+    image: frontpatient
     ports:
-      - "5103:80"
+      - "32770:8080"
     depends_on:
       - apigatewaymedilabo
-      - apiauthenticationmedilabo 
-      # - sqlserver
-    build: "./APIHistoriquePatient/"
+      - apiinformationspatient
+    build: "./FrontPatient/"
+    networks:
+      - medilabo-network
 
-  apirapportpatientmedilabo:
-    image: apirapportpatientmedilabo
-    ports:
-      - "5104:80"
-    depends_on:
-      - apigatewaymedilabo
-      - apiauthenticationmedilabo 
-      # - sqlserver
-    build: "./APIRapportPatient/"
+  # apihistoriquepatientmedilabo:
+  #   image: apihistoriquepatientmedilabo
+  #   ports:
+  #     - "5103:80"
+  #   depends_on:
+  #     - apigatewaymedilabo
+  #     - apiauthenticationmedilabo 
+  #     # - sqlserver
+  #   build: "./APIHistoriquePatient/"
+  #   networks:
+  #     - medilabo-network
+
+  # apirapportpatientmedilabo:
+  #   image: apirapportpatientmedilabo
+  #   ports:
+  #     - "5104:80"
+  #   depends_on:
+  #     - apigatewaymedilabo
+  #     - apiauthenticationmedilabo 
+  #     # - sqlserver
+  #   build: "./APIRapportPatient/"
+  #   networks:
+  #     - medilabo-network
   
   # sqlserver:
   #   image: mcr.microsoft.com/mssql/server:2022-latest
@@ -65,4 +82,8 @@
 volumes:
   dataPatients:
   # sql-data:  
+
+networks:
+  medilabo-network:
+    driver: bridge      
   

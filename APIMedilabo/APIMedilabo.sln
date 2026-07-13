@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIInformationsPatient", ".
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIAuthenticationMediLabo", "..\APIAuthenticationMediLabo\APIAuthenticationMediLabo.csproj", "{EB504746-2CE4-4E9A-B077-7DC10149DC40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontGestionPatients", "..\FrontGestionPatients\FrontGestionPatients.csproj", "{1E91D916-BC29-4844-A8B3-401A0202F1D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontPatient", "..\FrontPatient\FrontPatient.csproj", "{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{EB504746-2CE4-4E9A-B077-7DC10149DC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB504746-2CE4-4E9A-B077-7DC10149DC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB504746-2CE4-4E9A-B077-7DC10149DC40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E91D916-BC29-4844-A8B3-401A0202F1D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E91D916-BC29-4844-A8B3-401A0202F1D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E91D916-BC29-4844-A8B3-401A0202F1D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E91D916-BC29-4844-A8B3-401A0202F1D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

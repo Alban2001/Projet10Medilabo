@@ -12,6 +12,7 @@ using System.Collections;
 
 namespace APIInformationsPatient.Controllers
 {
+    [Route("api/patient")]
     public class PatientController : Controller
     {
         private IPatientRepository _patientRepository;
