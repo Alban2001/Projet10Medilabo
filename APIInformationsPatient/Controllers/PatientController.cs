@@ -9,10 +9,13 @@ using Data;
 using Models;
 using APIInformationsPatient.Repositories;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIInformationsPatient.Controllers
 {
+    [ApiController]
     [Route("api/patient")]
+    [Authorize]
     public class PatientController : Controller
     {
         private IPatientRepository _patientRepository;
@@ -23,7 +26,7 @@ namespace APIInformationsPatient.Controllers
         }
 
         [HttpGet]
-        [Route("/Patients")]
+        [Route("patients")]
         public async Task<IActionResult> Patients()
         {
             var patients = await _patientRepository.FindAll();
@@ -32,7 +35,7 @@ namespace APIInformationsPatient.Controllers
         }
 
         [HttpGet]
-        [Route("/Patient/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> Patient(int id)
         {
             Patient patient = await _patientRepository.FindById(id);
@@ -44,7 +47,7 @@ namespace APIInformationsPatient.Controllers
         }
 
         [HttpPost]
-        [Route("/Patient")]
+        [Route("")]
         public async Task<IActionResult> Create([FromBody] Patient patient)
         {
             if (!ModelState.IsValid)
@@ -58,7 +61,7 @@ namespace APIInformationsPatient.Controllers
         }
 
         [HttpPut]
-        [Route("/Patient/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Patient patient)
         {
             Patient verifPatient = await _patientRepository.FindById(id);
@@ -77,7 +80,7 @@ namespace APIInformationsPatient.Controllers
         }
 
         [HttpDelete]
-        [Route("/Patient/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             Patient patient = await _patientRepository.FindById(id);

@@ -8,32 +8,19 @@ namespace APIAuthenticationMediLabo.Services
 {
     public class JwtService
     {
-        private readonly IConfiguration _config;
-
-        public JwtService(IConfiguration config)
+        public string GenerateToken(string secret, List<Claim> claims)
         {
-            _config = config;
-        }
-
-        public string GenerateToken(User user)
-        {
-            var claims = new[]
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Email, user.Email)
-        };
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(60),
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddHours(2),
-                signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using FrontPatient.Services;
 using FrontPatient.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontPatient.Controllers
 {
+    [Route("patient")]
     public class PatientController : Controller
     {
         private readonly PatientAPIService _patientService;
@@ -14,9 +16,12 @@ namespace FrontPatient.Controllers
             _patientService = patientService;
         }
 
+        [HttpGet]
+        [Route("patients")]
         public async Task<IActionResult> Index()
         {
             var patients = await _patientService.GetPatients();
+
             return View("Patients", patients);
         }
 

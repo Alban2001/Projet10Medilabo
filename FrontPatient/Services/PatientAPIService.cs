@@ -1,4 +1,10 @@
-﻿using FrontPatient.ViewModels;
+﻿using APIAuthenticationMediLabo.DTOs;
+using Azure.Core;
+using FrontPatient.ViewModels;
+using NuGet.Protocol;
+using NuGet.Protocol.Plugins;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace FrontPatient.Services
 {
@@ -6,14 +12,40 @@ namespace FrontPatient.Services
     {
         private readonly HttpClient _httpClient;
 
-        public PatientAPIService(HttpClient httpClient)
+        public PatientAPIService(IHttpClientFactory factory)
         {
-            _httpClient = httpClient;
+            _httpClient = factory.CreateClient("PatientAPIService");
+        }
+
+        private async Task<string> GetToken()
+        {
+            var response = await _httpClient.PostAsJsonAsync(
+                "/api/authentication/login",
+                new LoginDTO
+                {
+                    Email = "admin@medilabo.fr",
+                    Password = "Admin126754?!"
+                });
+
+            response.EnsureSuccessStatusCode();
+
+            var login = await response.Content.ReadAsStringAsync();
+
+            return login;
         }
 
         public async Task<List<PatientViewModel>> GetPatients()
         {
-            return await _httpClient.GetFromJsonAsync<List<PatientViewModel>>("");
+            var token = await GetToken();
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("JwtBearer", token);
+
+            var response = await _httpClient.GetAsync("/api/patient/patients");
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<List<PatientViewModel>>();
         }
 
         public async Task<PatientViewModel> GetPatient(int id)

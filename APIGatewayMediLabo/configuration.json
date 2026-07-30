@@ -1,9 +1,21 @@
 {
   "Routes": [
     {
-      "UpstreamPathTemplate": "/patient/{everything}",
-      "UpstreamHttpMethod": [ "PUT", "GET", "POST", "DELETE" ],
-      "DownstreamPathTemplate": "/api/patient/{everything}",
+      "UpstreamPathTemplate": "/api/authentication/login",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/authentication/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiauthenticationmedilabo",
+          "Port": 8080
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/api/patient/patients",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/patient/patients",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -11,11 +23,54 @@
           "Port": 8080
         }
       ],
-      "SwaggerKey": "apiinformationspatient",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
+        "AuthenticationProviderKey": "JwtBearer",
         "AllowedScopes": []
       }
+    },
+    {
+      "UpstreamPathTemplate": "/api/patient/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ],
+      "DownstreamPathTemplate": "/api/patient/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiinformationspatient",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/patient",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/patient",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiinformationspatient",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "JwtBearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/patient/patients",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/patient/patients",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "frontpatient",
+          "Port": 8080
+        }
+      ]
     },
     {
       "UpstreamPathTemplate": "/historique/{everything}",
@@ -29,7 +84,7 @@
         }
       ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
+        "AuthenticationProviderKey": "JwtBearer",
         "AllowedScopes": []
       }
     },
@@ -45,21 +100,9 @@
         }
       ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
+        "AuthenticationProviderKey": "JwtBearer",
         "AllowedScopes": []
       }
-    }
-  ],
-  "SwaggerEndPoints": [
-    {
-      "Key": "apiinformationspatient",
-      "Config": [
-        {
-          "Name": "API Patients",
-          "Version": "v1",
-          "Url": "http://localhost:32769/swagger/v1/swagger.json"
-        }
-      ]
     }
   ],
   "GlobalConfiguration": {

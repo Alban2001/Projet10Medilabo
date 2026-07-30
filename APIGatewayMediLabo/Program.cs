@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,27 +15,33 @@ builder.Services.AddControllers();
 
 builder.Services.AddOcelot(builder.Configuration);
 
-builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer("IdentityApiKey", options =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "JwtBearer";
+    options.DefaultChallengeScheme = "JwtBearer";
+})
+.AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.RequireHttpsMetadata = false;
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
 
-        // à adapter selon ton service d'authentification
-        options.Authority = "http://localhost:32771";
-        options.Audience = "gateway";
-    });
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseSwaggerForOcelotUI(opt => {
-    opt.PathToSwaggerGenerator = "/swagger/docs";
-});
 
 await app.UseOcelot();
 
