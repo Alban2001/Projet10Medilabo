@@ -25,12 +25,15 @@ namespace FrontPatient.Controllers
             return View("Patients", patients);
         }
 
+        [HttpGet]
+        [Route("details/{id}")]
         public async Task<IActionResult> Details(int id)
         {
             var patient = await _patientService.GetPatient(id);
             return View(patient);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -40,49 +43,62 @@ namespace FrontPatient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PatientViewModel patient)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(patient);
+            }
+
             try
             {
                 await _patientService.CreatePatient(patient);
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                ModelState.AddModelError("", ex.Message);
                 return View(patient);
             }
+
         }
 
-        public ActionResult Edit(int id)
+        [HttpGet]
+        [Route("edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var patient = await _patientService.GetPatient(id);
+            return View(patient);
         }
 
         [HttpPost]
+        [Route("edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, PatientViewModel patient)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(patient);
+            }
+
             try
             {
                 await _patientService.UpdatePatient(id, patient);
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
+                ModelState.AddModelError("", ex.Message);
+
                 return View(patient);
             }
         }
 
-        // GET: PatientController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: PatientController/Delete/5
         [HttpPost]
+        [Route("delete/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id, PatientViewModel patient)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
@@ -92,6 +108,7 @@ namespace FrontPatient.Controllers
             }
             catch
             {
+                var patient = await _patientService.GetPatient(id);
                 return View(patient);
             }
         }

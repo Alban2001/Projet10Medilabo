@@ -1,6 +1,7 @@
 ﻿using APIAuthenticationMediLabo.DTOs;
 using Azure.Core;
 using FrontPatient.ViewModels;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using NuGet.Protocol;
 using NuGet.Protocol.Plugins;
 using System.Net.Http;
@@ -19,18 +20,29 @@ namespace FrontPatient.Services
 
         private async Task<string> GetToken()
         {
-            var response = await _httpClient.PostAsJsonAsync(
-                "/api/authentication/login",
-                new LoginDTO
+            var login = "";
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync(
+                    "/api/authentication/login",
+                    new LoginDTO
+                    {
+                        Email = "admin@medilabo.fr",
+                        Password = "Admin126754?!"
+                    });
+
+                login = await response.Content.ReadAsStringAsync();
+
+
+            }
+            catch (Exception ex)
+            {
+                using (StreamWriter sw = new StreamWriter("log.txt"))
                 {
-                    Email = "admin@medilabo.fr",
-                    Password = "Admin126754?!"
-                });
+                    sw.WriteLine(ex.Message);
+                }
 
-            response.EnsureSuccessStatusCode();
-
-            var login = await response.Content.ReadAsStringAsync();
-
+            }
             return login;
         }
 
@@ -39,33 +51,65 @@ namespace FrontPatient.Services
             var token = await GetToken();
 
             _httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("JwtBearer", token);
+                new AuthenticationHeaderValue("Bearer", token);
 
             var response = await _httpClient.GetAsync("/api/patient/patients");
-
-            response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<List<PatientViewModel>>();
         }
 
         public async Task<PatientViewModel> GetPatient(int id)
         {
-            return await _httpClient.GetFromJsonAsync<PatientViewModel>($"{id}");
+            var token = await GetToken();
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.GetAsync($"/api/patient/{id}");
+
+            return await response.Content.ReadFromJsonAsync<PatientViewModel>();
         }
 
         public async Task CreatePatient(PatientViewModel patient)
         {
-            await _httpClient.PostAsJsonAsync("", patient);
+            var token = await GetToken();
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.PostAsJsonAsync("/api/patient", patient);
+
+            response.EnsureSuccessStatusCode();
         }
 
         public async Task UpdatePatient(int id, PatientViewModel patient)
         {
-            await _httpClient.PutAsJsonAsync($"{id}", patient);
+            var token = await GetToken();
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.PutAsJsonAsync(
+                $"/api/patient/{id}",
+                patient);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(
+                    $"Erreur API Update : {(int)response.StatusCode} {response.StatusCode}\n{content}");
+            }
         }
 
         public async Task DeletePatient(int id)
         {
-            await _httpClient.DeleteAsync($"{id}");
+            var token = await GetToken();
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            await _httpClient.DeleteAsync($"/api/patient/{id}");
         }
     }
 }

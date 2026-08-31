@@ -10,6 +10,8 @@ using Models;
 using APIInformationsPatient.Repositories;
 using System.Collections;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using System.Net.Http;
 
 namespace APIInformationsPatient.Controllers
 {
@@ -60,13 +62,10 @@ namespace APIInformationsPatient.Controllers
             return Created(string.Empty, patient);
         }
 
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Patient patient)
         {
-            Patient verifPatient = await _patientRepository.FindById(id);
-
-            if (verifPatient == null)
+            if (id != patient.Id)
                 return NotFound("Patient introuvable");
 
             if (!ModelState.IsValid)
@@ -75,8 +74,8 @@ namespace APIInformationsPatient.Controllers
             }
 
             _patientRepository.Update(patient);
-
-            return Created(string.Empty, patient);
+            
+            return Ok(patient);
         }
 
         [HttpDelete]

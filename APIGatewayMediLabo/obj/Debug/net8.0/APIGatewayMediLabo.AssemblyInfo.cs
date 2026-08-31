@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APIGatewayMediLabo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+983ed2ba91e038ff26c7c6e1cedbaeed5c97bd25")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c46692feca7666a934006d4f5bc5d88e5a3a0f54")]
 [assembly: System.Reflection.AssemblyProductAttribute("APIGatewayMediLabo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APIGatewayMediLabo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
