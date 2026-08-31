@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APIDatabaseAuthenticationMediLabo\APIDatabaseAuthenticationMediLabo.csproj" />
+    <ProjectReference Include="..\APIAuthenticationMediLabo\APIAuthenticationMediLabo.csproj" />
   </ItemGroup>
 
 </Project>

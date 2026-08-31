@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIMedilabo", "APIMedilabo.csproj", "{CC93DB5E-8044-4497-BBC1-8FEDDF83117B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMedilabo", "APIMedilabo.csproj", "{CC93DB5E-8044-4497-BBC1-8FEDDF83117B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGatewayMediLabo", "..\APIGatewayMediLabo\APIGatewayMediLabo.csproj", "{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIDatabaseAuthenticationMediLabo", "..\APIDatabaseAuthenticationMediLabo\APIDatabaseAuthenticationMediLabo.csproj", "{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIInformationsPatient", "..\APIInformationsPatient\APIInformationsPatient.csproj", "{3B750348-F757-4E13-8E93-F14800037654}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIAuthenticationMediLabo", "..\APIAuthenticationMediLabo\APIAuthenticationMediLabo.csproj", "{EB504746-2CE4-4E9A-B077-7DC10149DC40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontPatient", "..\FrontPatient\FrontPatient.csproj", "{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +27,18 @@ Global
 		{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2444C1D-D4A8-4BD6-B7EC-873452AF8324}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93FF29A0-98B3-491D-B00C-2AF69B8CA0AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B750348-F757-4E13-8E93-F14800037654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B750348-F757-4E13-8E93-F14800037654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B750348-F757-4E13-8E93-F14800037654}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B750348-F757-4E13-8E93-F14800037654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB504746-2CE4-4E9A-B077-7DC10149DC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB504746-2CE4-4E9A-B077-7DC10149DC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB504746-2CE4-4E9A-B077-7DC10149DC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB504746-2CE4-4E9A-B077-7DC10149DC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

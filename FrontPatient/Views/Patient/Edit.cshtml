@@ -1,0 +1,79 @@
+﻿@model FrontPatient.ViewModels.PatientViewModel
+@using System.Text.Encodings.Web;
+
+@{
+    ViewData["Title"] = "Modifier un patient";
+}
+
+<h1>Modifier un patient</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Patient"
+              asp-action="Edit"
+              asp-route-id="@Model.Id"
+              method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Nom" class="control-label fw-bold">Nom</label>
+                <input asp-for="Nom" class="form-control" />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Prenom" class="control-label fw-bold">Prénom</label>
+                <input asp-for="Prenom" class="form-control" />
+                <span asp-validation-for="Prenom" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="DateNaissance" class="control-label fw-bold">Date de Naissance</label>
+                <input asp-for="DateNaissance" class="form-control" />
+                <span asp-validation-for="DateNaissance" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Genre" class="control-label fw-bold">Genre</label>
+                <input asp-for="Genre" class="form-control" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="NumeroRue" class="control-label fw-bold">Numéro rue</label>
+                <input asp-for="NumeroRue" class="form-control" />
+                <span asp-validation-for="NumeroRue" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="NomRue" class="control-label fw-bold">Nom rue</label>
+                <input asp-for="NomRue" class="form-control" />
+                <span asp-validation-for="NomRue" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="CodePostal" class="control-label fw-bold">Code postal</label>
+                <input asp-for="CodePostal" class="form-control" />
+                <span asp-validation-for="CodePostal" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Ville" class="control-label fw-bold">Ville</label>
+                <input asp-for="Ville" class="form-control" />
+                <span asp-validation-for="Ville" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="NumeroTelephone" class="control-label fw-bold">Numéro de téléphone</label>
+                <input asp-for="NumeroTelephone" class="form-control" />
+                <span asp-validation-for="NumeroTelephone" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Enregister" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Retour", "Index")
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

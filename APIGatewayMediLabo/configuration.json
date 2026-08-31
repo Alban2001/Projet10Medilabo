@@ -1,84 +1,106 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "apiinformationspatientmedilabo/{version}/patient/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "informations-patient",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/patient/{id}",
-      "UpstreamHttpMethod": [ "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "DownstreamPathTemplate": "apiinformationspatientmedilabo/{version}/patient",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "informations-patient",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/patient/",
+      "UpstreamPathTemplate": "/api/authentication/login",
       "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "DownstreamPathTemplate": "apihistoriquepatientmedilabo/{version}/historique/note",
+      "DownstreamPathTemplate": "/api/authentication/login",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "historique-patient",
-          "Port": 80
+          "Host": "apiauthenticationmedilabo",
+          "Port": 8080
         }
-      ],
-      "UpstreamPathTemplate": "/patient/historique/note",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
-      }
+      ]
     },
     {
-      "DownstreamPathTemplate": "apihistoriquepatientmedilabo/{version}/historique/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "historique-patient",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/patient/historique/{id}",
+      "UpstreamPathTemplate": "/api/patient/patients",
       "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/patient/patients",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiinformationspatient",
+          "Port": 8080
+        }
+      ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
+        "AuthenticationProviderKey": "Bearer"
       }
     },
     {
-      "DownstreamPathTemplate": "apirapportpatientmedilabo/{version}/rapport",
+      "UpstreamPathTemplate": "/api/patient/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ],
+      "DownstreamPathTemplate": "/api/patient/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiinformationspatient",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/patient",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/patient",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiinformationspatient",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/patient/patients",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/patient/patients",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "frontpatient",
+          "Port": 8080
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/historique/{everything}",
+      "UpstreamHttpMethod": [ "PUT", "GET", "POST", "DELETE" ],
+      "DownstreamPathTemplate": "/api/historique/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "historique-patient",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/rapport/{everything}",
+      "UpstreamHttpMethod": [ "PUT", "GET", "POST", "DELETE" ],
+      "DownstreamPathTemplate": "/api/rapport/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "rapport-patient",
-          "Port": 80
+          "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/patient/rapport",
-      "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "IdentityApiKey",
-        "AllowedScopes": []
+        "AuthenticationProviderKey": "Bearer"
       }
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:32768/"
+  }
 }

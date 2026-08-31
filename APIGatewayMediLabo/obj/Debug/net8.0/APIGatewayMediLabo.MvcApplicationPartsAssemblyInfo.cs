@@ -11,8 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("APIDatabaseAuthenticationMediLabo")]
-[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("APIMedilabo")]
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Ocelot")]
 
 // Généré par la classe MSBuild WriteCodeFragment.

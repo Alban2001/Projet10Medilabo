@@ -3,17 +3,17 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "apigatewaymedilabo",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5074"
+      "applicationUrl": "http://localhost:32768"
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "apigatewaymedilabo",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -21,7 +21,7 @@
     "Container (Dockerfile)": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/weatherforecast",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
         "ASPNETCORE_HTTP_PORTS": "8080"
       },
@@ -34,7 +34,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:19117",
+      "applicationUrl": "http://localhost:32768",
       "sslPort": 0
     }
   }

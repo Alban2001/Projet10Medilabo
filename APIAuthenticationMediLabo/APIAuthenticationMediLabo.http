@@ -1,0 +1,6 @@
+@APIAuthenticationMediLabo_HostAddress = http://localhost:5249
+
+GET {{APIAuthenticationMediLabo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

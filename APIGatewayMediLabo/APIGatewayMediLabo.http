@@ -1,6 +1,6 @@
-@APIGatewayMediLabo_HostAddress = http://localhost:5074
+@APIGatewayMediLabo_HostAddress = http://localhost:32768
 
-GET {{APIGatewayMediLabo_HostAddress}}/weatherforecast/
+GET {{APIGatewayMediLabo_HostAddress}}/
 Accept: application/json
 
 ###
