@@ -44,18 +44,27 @@
     build: "./FrontPatient/"
     networks:
       - medilabo-network
+  
+  mongodb:
+    image: mongo:8
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
 
-  # apihistoriquepatientmedilabo:
-  #   image: apihistoriquepatientmedilabo
-  #   ports:
-  #     - "5103:80"
-  #   depends_on:
-  #     - apigatewaymedilabo
-  #     - apiauthenticationmedilabo 
-  #     # - sqlserver
-  #   build: "./APIHistoriquePatient/"
-  #   networks:
-  #     - medilabo-network
+  apinoteshistopatientsmedilabo:
+    image: apinoteshistopatientsmedilabo
+    ports:
+      - "32772:8080"
+    depends_on:
+      - apigatewaymedilabo
+      - apiauthenticationmedilabo 
+      - mongodb
+    build: "./APINotesHistoPatientsMedilabo/"
+    networks:
+      - medilabo-network
 
   # apirapportpatientmedilabo:
   #   image: apirapportpatientmedilabo
@@ -81,6 +90,7 @@
 
 volumes:
   dataPatients:
+  mongodb_data:  
   # sql-data:  
 
 networks:

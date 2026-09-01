@@ -70,13 +70,43 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/historique/{everything}",
-      "UpstreamHttpMethod": [ "PUT", "GET", "POST", "DELETE" ],
-      "DownstreamPathTemplate": "/api/historique/{everything}",
+      "UpstreamPathTemplate": "/api/historique/notes/{idPatient}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/historique/notes/{idPatient}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "historique-patient",
+          "Host": "apinoteshistopatientsmedilabo",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/historique/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ],
+      "DownstreamPathTemplate": "/api/historique/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apinoteshistopatientsmedilabo",
+          "Port": 8080
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/historique",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/historique",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apinoteshistopatientsmedilabo",
           "Port": 8080
         }
       ],
