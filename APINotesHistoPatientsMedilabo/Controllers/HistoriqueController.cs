@@ -38,6 +38,14 @@ namespace APINotesHistoPatientsMedilabo.Controllers
             return Ok(note);
         }
 
+        [HttpGet("nextid")]
+        public async Task<ActionResult<int>> GetNextId()
+        {
+            var nextId = await _repository.GetNextIdAsync();
+
+            return Ok(nextId);
+        }
+
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> Create(Note note)

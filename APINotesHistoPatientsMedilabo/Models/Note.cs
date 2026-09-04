@@ -11,8 +11,6 @@ namespace APINotesHistoPatientsMedilabo.Models
 
         public int PatientId { get; set; }
 
-        public int MedecinId { get; set; }
-
         public DateTime DateHeure { get; set; }
 
         public string UneNote { get; set; } = string.Empty;

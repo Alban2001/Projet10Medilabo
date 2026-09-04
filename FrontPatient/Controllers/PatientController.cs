@@ -34,12 +34,14 @@ namespace FrontPatient.Controllers
         }
 
         [HttpGet]
+        [Route("ajout")]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Route("ajout")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PatientViewModel patient)
         {

@@ -1,0 +1,44 @@
+﻿@model FrontPatient.ViewModels.NoteViewModel
+@using System.Text.Encodings.Web;
+
+@{
+    ViewData["Title"] = "Modifier une note";
+}
+
+<h1>Modifier un patient</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Historique"
+              asp-action="Edit"
+              asp-route-id="@Model.Id"
+              method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="UneNote" class="control-label fw-bold">Note</label>
+                <textarea asp-for="UneNote" class="form-control"></textarea>
+                <span asp-validation-for="UneNote" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Enregister" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink(
+            "Retour",
+            "Details",
+            new { id = ViewBag.PatientID }
+            )
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

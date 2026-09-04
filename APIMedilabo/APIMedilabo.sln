@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIAuthenticationMediLabo",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontPatient", "..\FrontPatient\FrontPatient.csproj", "{C6AEC485-4DFF-476D-8D77-3919CEBE79FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APINotesHistoPatientsMedilabo", "..\APINotesHistoPatientsMedilabo\APINotesHistoPatientsMedilabo.csproj", "{3BA0E4C9-CF8F-4757-B991-A6AF2738A2E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APINotesHistoPatientsMedilabo", "..\APINotesHistoPatientsMedilabo\APINotesHistoPatientsMedilabo.csproj", "{3BA0E4C9-CF8F-4757-B991-A6AF2738A2E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

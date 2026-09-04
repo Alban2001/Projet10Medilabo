@@ -24,6 +24,20 @@ namespace APINotesHistoPatientsMedilabo.Repositories
                 .Find(x => x.PatientId == idPatient)
                 .ToListAsync();
         }
+        public async Task<int> GetNextIdAsync()
+        {
+            var lastNote = await _collection
+                .Find(_ => true)
+                .SortByDescending(x => x.Id)
+                .FirstOrDefaultAsync();
+
+            if (lastNote == null)
+            {
+                return 1;
+            }
+
+            return lastNote.Id + 1;
+        }
 
         public async Task<Note?> GetByIdAsync(int id)
         {

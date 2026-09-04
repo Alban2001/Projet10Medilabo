@@ -41,10 +41,11 @@
     depends_on:
       - apigatewaymedilabo
       - apiinformationspatient
+      - apinoteshistopatientsmedilabo
     build: "./FrontPatient/"
     networks:
       - medilabo-network
-  
+ 
   mongodb:
     image: mongo:8
     container_name: mongodb
@@ -53,6 +54,8 @@
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - medilabo-network
 
   apinoteshistopatientsmedilabo:
     image: apinoteshistopatientsmedilabo

@@ -8,9 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHttpClient("PatientAPIService", client => { client.BaseAddress = new Uri("http://localhost:32768"); });
+builder.Services.AddHttpClient("HistoriqueAPIService", client => { client.BaseAddress = new Uri("http://apigatewaymedilabo:8080"); });
+builder.Services.AddHttpClient("PatientAPIService", client => { client.BaseAddress = new Uri("http://apigatewaymedilabo:8080"); });
 
 builder.Services.AddScoped<PatientAPIService>();
+builder.Services.AddScoped<HistoriqueAPIService>();
 
 builder.Services.AddAuthorization();
 

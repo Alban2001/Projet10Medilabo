@@ -1,4 +1,4 @@
-﻿namespace APIAuthenticationMediLabo.DTOs
+﻿namespace FrontPatient.DTOs
 {
     public class LoginDTO
     {

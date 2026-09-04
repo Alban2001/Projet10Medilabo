@@ -1,4 +1,4 @@
-﻿using APIAuthenticationMediLabo.DTOs;
+﻿using FrontPatient.DTOs;
 using Azure.Core;
 using FrontPatient.ViewModels;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
