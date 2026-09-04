@@ -1,1 +1,1 @@
-Hôte inconnu. (apigatewaymedilabo:8080)
+An error occurred while sending the request.

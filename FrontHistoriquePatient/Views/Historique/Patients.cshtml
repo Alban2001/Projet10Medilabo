@@ -1,0 +1,90 @@
+﻿@model IEnumerable<FrontHistoriquePatient.ViewModels.PatientViewModel>
+
+@{
+    ViewData["Title"] = "Liste des Patients";
+}
+
+<h1>Patients</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateNaissance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroRue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomRue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodePostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ville)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroTelephone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateNaissance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroRue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomRue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodePostal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ville)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroTelephone)
+                </td>
+                <td class="d-flex">
+                    @Html.ActionLink(
+                             "Voir les notes",
+                             "Details",
+                             new { id = item.Id },
+                             new { @class = "btn btn-secondary btn-sm  me-2" }
+                             )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,122 @@
+﻿@model IEnumerable<FrontPatient.ViewModels.NoteViewModel>
+
+@{
+    ViewData["Title"] = "Notes du patient";
+}
+
+<h1>Notes du Patient</h1>
+
+<p>
+    <a asp-controller="Historique" asp-action="Create" asp-route-idPatient="@ViewBag.PatientID">Ajouter une note</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UneNote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateHeure)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UneNote)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateHeure)
+                </td>
+                <td class="d-flex">
+                    @Html.ActionLink(
+                             "Modifier",
+                             "Edit",
+                             new { id = item.Id },
+                             new { @class = "btn btn-primary btn-sm me-2" }
+                             )
+
+                    <button type="button"
+                            class="btn btn-danger btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteModal"
+                            data-id="@item.Id">
+                        Supprimer
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Retour", "Index", "Patient")
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    Confirmer la suppression
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fermer">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    Êtes-vous sûr de vouloir supprimer cette note N°
+                    <strong id="notePatientModal"></strong> ?
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Annuler
+                </button>
+
+                <form id="deleteForm" method="post">
+                    <button type="submit" class="btn btn-danger">
+                        Supprimer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const deleteModal = document.getElementById('deleteModal');
+
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+
+        // Bouton qui a ouvert la modale
+        const button = event.relatedTarget;
+
+        // Récupération des informations du patient
+        const id = button.getAttribute('data-id');
+
+        // Affichage du nom dans la modale
+        document.getElementById('notePatientModal').textContent = id;
+
+        // Modification de l'URL du formulaire
+        document.getElementById('deleteForm').action = '/Historique/Delete/' + id;
+    });
+</script>

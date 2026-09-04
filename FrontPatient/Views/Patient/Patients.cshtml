@@ -83,6 +83,7 @@
                     @Html.ActionLink(
                              "Modifier",
                              "Edit",
+                             "Patient",
                              new { id = item.Id },
                              new { @class = "btn btn-primary btn-sm me-2" }
                              )
@@ -90,6 +91,7 @@
                     @Html.ActionLink(
                              "Détails",
                              "Details",
+                             "Patient",
                              new { id = item.Id },
                              new { @class = "btn btn-secondary btn-sm  me-2" }
                              )
@@ -103,6 +105,14 @@
                             data-prenom="@item.Prenom">
                         Supprimer
                     </button>
+
+                    @Html.ActionLink(
+                             "Voir les notes",
+                             "Details",
+                             "Historique",
+                             new { id = item.Id },
+                             new { @class = "btn btn-secondary btn-sm  me-2" }
+                             )
                 </td>
             </tr>
         }

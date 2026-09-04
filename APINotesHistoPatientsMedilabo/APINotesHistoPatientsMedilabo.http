@@ -1,0 +1,6 @@
+@APINotesHistoPatientsMedilabo_HostAddress = http://localhost:5016
+
+GET {{APINotesHistoPatientsMedilabo_HostAddress}}
+Accept: application/json
+
+###
