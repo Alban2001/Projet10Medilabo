@@ -271,13 +271,13 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/rapport/{everything}",
-      "UpstreamHttpMethod": [ "PUT", "GET", "POST", "DELETE" ],
-      "DownstreamPathTemplate": "/api/rapport/{everything}",
+      "UpstreamPathTemplate": "/api/rapport/{idPatient}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/rapport/{idPatient}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "rapport-patient",
+          "Host": "apirapportpatient",
           "Port": 8080
         }
       ],

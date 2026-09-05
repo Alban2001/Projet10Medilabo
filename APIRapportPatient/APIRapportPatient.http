@@ -1,0 +1,6 @@
+@APIRapportPatient_HostAddress = http://localhost:5083
+
+GET {{APIRapportPatient_HostAddress}}
+Accept: application/json
+
+###

@@ -109,15 +109,16 @@ namespace FrontHistoriquePatient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var note = await _noteService.GetNote(id);
+
             try
             {
                 await _noteService.DeleteNote(id);
 
-                return RedirectToAction("Details", new { idPatient = id });
+                return RedirectToAction("Details", new { idPatient = note.PatientId });
             }
             catch
             {
-                var note = await _noteService.GetNote(id);
                 return View(note);
             }
         }

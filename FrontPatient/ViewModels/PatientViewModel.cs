@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FrontPatient.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace FrontPatient.ViewModels
 {
@@ -29,5 +30,6 @@ namespace FrontPatient.ViewModels
         [Required(ErrorMessage = "{0} doit être rempli")]
         [Display(Name = "Numéro Téléphone")]
         public string NumeroTelephone { get; set; }
+        public RapportDTO RapportDTO { get; set; } = null;
     }
 }

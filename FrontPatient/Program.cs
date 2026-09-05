@@ -1,3 +1,4 @@
+using FrontPatient.Data;
 using FrontPatient.Services;
 using Microsoft.AspNetCore.Authentication;
 using NuGet.Common;
@@ -13,10 +14,18 @@ builder.Services.AddHttpClient("PatientAPIService", client => { client.BaseAddre
 
 builder.Services.AddScoped<PatientAPIService>();
 builder.Services.AddScoped<HistoriqueAPIService>();
+builder.Services.AddScoped<DbSeeder>();
 
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
+
+    await seeder.SeedAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -70,6 +70,18 @@ namespace FrontPatient.Services
             return await response.Content.ReadFromJsonAsync<PatientViewModel>();
         }
 
+        public async Task<RapportDTO> GetRapportPatient(int idPatient)
+        {
+            var token = await GetToken();
+
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.GetAsync($"/api/rapport/{idPatient}");
+
+            return await response.Content.ReadFromJsonAsync<RapportDTO>();
+        }
+
         public async Task CreatePatient(PatientViewModel patient)
         {
             var token = await GetToken();

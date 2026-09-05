@@ -1,4 +1,5 @@
-﻿using FrontPatient.Services;
+﻿using FrontPatient.DTOs;
+using FrontPatient.Services;
 using FrontPatient.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +30,11 @@ namespace FrontPatient.Controllers
         [Route("details/{id}")]
         public async Task<IActionResult> Details(int id)
         {
+            RapportDTO unRapport = await _patientService.GetRapportPatient(id);
+
             var patient = await _patientService.GetPatient(id);
+            patient.RapportDTO = unRapport;
+
             return View(patient);
         }
 
