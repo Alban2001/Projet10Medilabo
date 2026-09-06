@@ -1,3 +1,4 @@
+using FrontPatient.Data;
 using FrontPatient.Services;
 using Microsoft.AspNetCore.Authentication;
 using NuGet.Common;
@@ -13,6 +14,7 @@ builder.Services.AddHttpClient("PatientAPIService", client => { client.BaseAddre
 
 builder.Services.AddScoped<PatientAPIService>();
 builder.Services.AddScoped<HistoriqueAPIService>();
+builder.Services.AddScoped<DbSeeder>();
 
 builder.Services.AddAuthorization();
 

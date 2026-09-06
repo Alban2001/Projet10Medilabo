@@ -1,4 +1,6 @@
-﻿using FrontPatient.Services;
+﻿using FrontPatient.Data;
+using FrontPatient.DTOs;
+using FrontPatient.Services;
 using FrontPatient.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,16 +12,20 @@ namespace FrontPatient.Controllers
     public class PatientController : Controller
     {
         private readonly PatientAPIService _patientService;
+        private readonly DbSeeder _dbSeeder;
 
-        public PatientController(PatientAPIService patientService)
+        public PatientController(PatientAPIService patientService, DbSeeder dbSeeder)
         {
             _patientService = patientService;
+            _dbSeeder = dbSeeder;
         }
 
         [HttpGet]
         [Route("patients")]
         public async Task<IActionResult> Index()
         {
+            await _dbSeeder.SeedAsync();
+
             var patients = await _patientService.GetPatients();
 
             return View("Patients", patients);
@@ -29,7 +35,11 @@ namespace FrontPatient.Controllers
         [Route("details/{id}")]
         public async Task<IActionResult> Details(int id)
         {
+            RapportDTO unRapport = await _patientService.GetRapportPatient(id);
+
             var patient = await _patientService.GetPatient(id);
+            patient.RapportDTO = unRapport;
+
             return View(patient);
         }
 

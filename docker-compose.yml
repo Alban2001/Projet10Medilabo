@@ -69,17 +69,16 @@
     networks:
       - medilabo-network
 
-  # apirapportpatientmedilabo:
-  #   image: apirapportpatientmedilabo
-  #   ports:
-  #     - "5104:80"
-  #   depends_on:
-  #     - apigatewaymedilabo
-  #     - apiauthenticationmedilabo 
-  #     # - sqlserver
-  #   build: "./APIRapportPatient/"
-  #   networks:
-  #     - medilabo-network
+  apirapportpatient:
+    image: apirapportpatient
+    ports:
+      - "32773:80"
+    depends_on:
+      - apigatewaymedilabo
+      - apiauthenticationmedilabo 
+    build: "./APIRapportPatient/"
+    networks:
+      - medilabo-network
   
   # sqlserver:
   #   image: mcr.microsoft.com/mssql/server:2022-latest

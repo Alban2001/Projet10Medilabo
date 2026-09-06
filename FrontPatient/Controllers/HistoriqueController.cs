@@ -3,7 +3,7 @@ using FrontPatient.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FrontHistoriquePatient.Controllers
+namespace FrontPatient.Controllers
 {
     [Route("historique")]
     public class HistoriqueController : Controller
@@ -109,15 +109,16 @@ namespace FrontHistoriquePatient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
+            var note = await _noteService.GetNote(id);
+
             try
             {
                 await _noteService.DeleteNote(id);
 
-                return RedirectToAction("Details", new { idPatient = id });
+                return RedirectToAction("Details", new { idPatient = note.PatientId });
             }
             catch
             {
-                var note = await _noteService.GetNote(id);
                 return View(note);
             }
         }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FrontPatient.DTOs;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace FrontPatient.ViewModels
 {
@@ -29,5 +31,8 @@ namespace FrontPatient.ViewModels
         [Required(ErrorMessage = "{0} doit être rempli")]
         [Display(Name = "Numéro Téléphone")]
         public string NumeroTelephone { get; set; }
+
+        [ValidateNever]
+        public RapportDTO RapportDTO { get; set; } = null;
     }
 }
