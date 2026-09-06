@@ -3,7 +3,7 @@ using FrontPatient.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FrontHistoriquePatient.Controllers
+namespace FrontPatient.Controllers
 {
     [Route("historique")]
     public class HistoriqueController : Controller

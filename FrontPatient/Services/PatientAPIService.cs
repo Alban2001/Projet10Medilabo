@@ -6,6 +6,7 @@ using NuGet.Protocol;
 using NuGet.Protocol.Plugins;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace FrontPatient.Services
 {
@@ -55,7 +56,23 @@ namespace FrontPatient.Services
 
             var response = await _httpClient.GetAsync("/api/patient/patients");
 
-            return await response.Content.ReadFromJsonAsync<List<PatientViewModel>>();
+            var content = await response.Content.ReadAsStringAsync();
+
+            response.EnsureSuccessStatusCode();
+
+            // Si l'API ne renvoie rien
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                return new List<PatientViewModel>();
+            }
+
+            // Désérialisation du JSON
+            return JsonSerializer.Deserialize<List<PatientViewModel>>(
+                content,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }) ?? new List<PatientViewModel>();
         }
 
         public async Task<PatientViewModel> GetPatient(int id)
@@ -82,7 +99,7 @@ namespace FrontPatient.Services
             return await response.Content.ReadFromJsonAsync<RapportDTO>();
         }
 
-        public async Task CreatePatient(PatientViewModel patient)
+        public async Task<PatientViewModel?> CreatePatient(PatientViewModel patient)
         {
             var token = await GetToken();
 
@@ -91,7 +108,16 @@ namespace FrontPatient.Services
 
             var response = await _httpClient.PostAsJsonAsync("/api/patient", patient);
 
+            var content = await response.Content.ReadAsStringAsync();
+
             response.EnsureSuccessStatusCode();
+
+            return JsonSerializer.Deserialize<PatientViewModel>(
+                content,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
         }
 
         public async Task UpdatePatient(int id, PatientViewModel patient)
