@@ -9,125 +9,373 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ======================================================
+// CONTROLLERS
+// ======================================================
 
 builder.Services.AddControllers();
 
-// DB
-builder.Services.AddDbContext<AppDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+// ======================================================
+// DATABASE - SQL SERVER
+// ======================================================
 
-// Identity
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddDbContext<AppDBContext>(options =>
+{
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions =>
+        {
+            // Permet de réessayer automatiquement si SQL Server
+            // met quelques secondes à être complètement disponible.
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null
+            );
+        });
+});
+
+// ======================================================
+// IDENTITY
+// ======================================================
+
+builder.Services
+    .AddIdentity<User, IdentityRole>(options =>
+    {
+        // ------------------------------
+        // Utilisateur
+        // ------------------------------
+
+        options.User.RequireUniqueEmail = true;
+
+        options.User.AllowedUserNameCharacters =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@";
+
+        // ------------------------------
+        // Mot de passe
+        // ------------------------------
+
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequiredLength = 12;
+
+        // ------------------------------
+        // Verrouillage
+        // ------------------------------
+
+        options.Lockout.MaxFailedAccessAttempts = 3;
+        options.Lockout.DefaultLockoutTimeSpan =
+            TimeSpan.FromMinutes(10);
+    })
     .AddEntityFrameworkStores<AppDBContext>()
     .AddDefaultTokenProviders();
 
+// ======================================================
+// JWT SERVICE
+// ======================================================
+
 builder.Services.AddScoped<JwtService>();
 
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    // Param�tres utilisateur.
-    options.User.RequireUniqueEmail = true;
-    options.User.AllowedUserNameCharacters =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@";
+// ======================================================
+// JWT AUTHENTICATION
+// ======================================================
 
-    // Param�tres des mots de passe.
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 12;
-
-    // Param�tres de verrouillage.
-    options.Lockout.MaxFailedAccessAttempts = 3;
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-});
-
-
-// JWT
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.SaveToken = true;
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services
+    .AddAuthentication(options =>
     {
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ClockSkew = TimeSpan.Zero,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
+        options.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+
+        options.DefaultChallengeScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+
+        // En développement Docker
+        options.RequireHttpsMetadata = false;
+
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+
+                ValidateLifetime = true,
+
+                ValidateIssuerSigningKey = true,
+
+                ClockSkew = TimeSpan.Zero,
+
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(
+                            builder.Configuration["Jwt:Key"]!
+                        )
+                    )
+            };
+    });
+
+// ======================================================
+// AUTHORIZATION
+// ======================================================
 
 builder.Services.AddAuthorization();
 
+// ======================================================
+// BUILD APPLICATION
+// ======================================================
+
 var app = builder.Build();
+
+// ======================================================
+// INITIALISATION DE LA BASE DE DONNÉES
+// ======================================================
+//
+// Cette partie est exécutée au démarrage de l'API.
+// Elle attend que SQL Server soit réellement disponible
+// avant d'effectuer les opérations Identity.
+// ======================================================
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    var userManager = services.GetRequiredService<UserManager<User>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-    string roleName = "ADMIN";
-    string roleUser = "USER";
-    string adminEmail = "admin@medilabo.fr";
-    string adminPassword = "Admin126754?!";
-
-    // 1. Création du rôle Admin s’il n’existe pas
-    if (!await roleManager.RoleExistsAsync(roleName))
+    try
     {
-        await roleManager.CreateAsync(new IdentityRole(roleName));
-    }
-    if (!await roleManager.RoleExistsAsync(roleUser))
-    {
-        await roleManager.CreateAsync(new IdentityRole(roleUser));
-    }
+        var dbContext =
+            services.GetRequiredService<AppDBContext>();
 
-    // 2. Création de l'utilisateur admin s’il n’existe pas
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    if (adminUser == null)
-    {
-        var newAdmin = new User
+        // --------------------------------------------------
+        // Vérification / création de la base via EF
+        // --------------------------------------------------
+
+        // Applique les migrations disponibles.
+        // Si ta base existe déjà et que les migrations sont
+        // à jour, aucune modification ne sera effectuée.
+        await dbContext.Database.MigrateAsync();
+
+        // --------------------------------------------------
+        // Récupération des services Identity
+        // --------------------------------------------------
+
+        var userManager =
+            services.GetRequiredService<UserManager<User>>();
+
+        var roleManager =
+            services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        // ==================================================
+        // CRÉATION DES RÔLES
+        // ==================================================
+
+        const string roleAdmin = "ADMIN";
+        const string roleUser = "USER";
+
+        // ------------------------------
+        // Rôle ADMIN
+        // ------------------------------
+
+        if (!await roleManager.RoleExistsAsync(roleAdmin))
         {
-            Nom = "VOIRIOT",
-            Prenom = "Alban",
-            UserName = "admin",
-            Email = adminEmail,
-            EmailConfirmed = true,
-            PhoneNumberConfirmed = true,
-            TwoFactorEnabled = false,
-            LockoutEnabled = false,
-            AccessFailedCount = 0
-        };
+            var result =
+                await roleManager.CreateAsync(
+                    new IdentityRole(roleAdmin)
+                );
 
-        var createResult = await userManager.CreateAsync(newAdmin, adminPassword);
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    Console.WriteLine(
+                        $"Erreur création rôle ADMIN : {error.Description}"
+                    );
+                }
+            }
+        }
 
-        if (createResult.Succeeded)
+        // ------------------------------
+        // Rôle USER
+        // ------------------------------
+
+        if (!await roleManager.RoleExistsAsync(roleUser))
         {
-            // 3. Ajouter l'utilisateur au rôle Admin
-            var user = await userManager.FindByEmailAsync(adminEmail);
-            await userManager.AddToRoleAsync(user, roleName);
+            var result =
+                await roleManager.CreateAsync(
+                    new IdentityRole(roleUser)
+                );
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    Console.WriteLine(
+                        $"Erreur création rôle USER : {error.Description}"
+                    );
+                }
+            }
+        }
+
+        // ==================================================
+        // CRÉATION DU COMPTE ADMINISTRATEUR
+        // ==================================================
+
+        const string adminEmail = "admin@medilabo.fr";
+        const string adminPassword = "Admin126754?!";
+
+        // Vérifie si l'administrateur existe déjà.
+        var adminUser =
+            await userManager.FindByEmailAsync(adminEmail);
+
+        // --------------------------------------------------
+        // Création uniquement s'il n'existe pas
+        // --------------------------------------------------
+
+        if (adminUser == null)
+        {
+            var newAdmin = new User
+            {
+                Nom = "VOIRIOT",
+                Prenom = "Alban",
+
+                UserName = "admin",
+
+                Email = adminEmail,
+                EmailConfirmed = true,
+
+                PhoneNumberConfirmed = true,
+
+                TwoFactorEnabled = false,
+
+                LockoutEnabled = false,
+
+                AccessFailedCount = 0
+            };
+
+            var createResult =
+                await userManager.CreateAsync(
+                    newAdmin,
+                    adminPassword
+                );
+
+            if (createResult.Succeeded)
+            {
+                Console.WriteLine(
+                    "Utilisateur administrateur créé avec succès."
+                );
+
+                // ------------------------------------------
+                // Ajout du rôle ADMIN
+                // ------------------------------------------
+
+                var roleResult =
+                    await userManager.AddToRoleAsync(
+                        newAdmin,
+                        roleAdmin
+                    );
+
+                if (!roleResult.Succeeded)
+                {
+                    foreach (var error in roleResult.Errors)
+                    {
+                        Console.WriteLine(
+                            $"Erreur ajout rôle ADMIN : {error.Description}"
+                        );
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(
+                        "Rôle ADMIN attribué avec succès."
+                    );
+                }
+            }
+            else
+            {
+                foreach (var error in createResult.Errors)
+                {
+                    Console.WriteLine(
+                        $"Erreur création compte admin : {error.Description}"
+                    );
+                }
+            }
         }
         else
         {
-            foreach (var error in createResult.Errors)
+            Console.WriteLine(
+                "L'utilisateur administrateur existe déjà."
+            );
+
+            // --------------------------------------------------
+            // Vérification que l'utilisateur possède ADMIN
+            // --------------------------------------------------
+
+            if (!await userManager.IsInRoleAsync(
+                adminUser,
+                roleAdmin))
             {
-                Console.WriteLine($"Erreur création compte admin : {error.Description}");
+                var roleResult =
+                    await userManager.AddToRoleAsync(
+                        adminUser,
+                        roleAdmin
+                    );
+
+                if (roleResult.Succeeded)
+                {
+                    Console.WriteLine(
+                        "Rôle ADMIN ajouté à l'utilisateur existant."
+                    );
+                }
             }
         }
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine(
+            "=================================================="
+        );
+
+        Console.WriteLine(
+            "ERREUR LORS DE L'INITIALISATION DE LA BASE"
+        );
+
+        Console.WriteLine(
+            "=================================================="
+        );
+
+        Console.WriteLine(ex.Message);
+
+        // On affiche également l'exception interne si elle existe.
+        if (ex.InnerException != null)
+        {
+            Console.WriteLine(
+                $"Exception interne : {ex.InnerException.Message}"
+            );
+        }
+
+        // --------------------------------------------------
+        // IMPORTANT :
+        // On ne fait pas planter l'API ici.
+        // L'application peut quand même démarrer.
+        // --------------------------------------------------
+    }
 }
 
+// ======================================================
+// MIDDLEWARES
+// ======================================================
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+// ======================================================
+// START APPLICATION
+// ======================================================
 
 app.Run();
