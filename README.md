@@ -319,10 +319,8 @@ Dans le cadre de ce projet, plusieurs bonnes pratiques de Green Code peuvent êt
 * limiter les appels vers les microservices ;
 * éviter de récupérer des données inutiles depuis SQL Server et MongoDB ;
 * utiliser des requêtes ciblées ;
-* mettre en place des index sur les champs fréquemment recherchés dans MongoDB ;
 * utiliser des DTO pour limiter les données transmises par les API ;
 * optimiser la taille des images Docker ;
-* utiliser des Dockerfiles multi-stage ;
 * supprimer les dépendances et fichiers inutiles des images ;
 * limiter le nombre de conteneurs exécutés lorsque certains services ne sont pas nécessaires ;
 * conserver les données dans des volumes afin d'éviter des opérations de reconstruction inutiles ;
